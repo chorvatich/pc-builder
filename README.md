@@ -1,36 +1,33 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# PC Builder
 
-## Getting Started
+Pick parts for a custom gaming PC, check that they work together, and see the total price — similar to PCPartPicker.
 
-First, run the development server:
+## Features
+
+- One part per category: CPU, CPU cooler, motherboard, memory, storage, video card, case, power supply
+- Compatibility checks: CPU socket, cooler socket, memory type and slot count, case form factor, GPU length, cooler height, radiator size, PSU wattage
+- Estimated system wattage and running total price
+- Builds are saved in the URL (shareable link) and in local storage
+
+Prices in `src/data/parts.ts` are sample values, not live retailer prices.
+
+## Stack
+
+Next.js (App Router) + TypeScript + Tailwind CSS. No database or auth; the parts catalog is a static file.
+
+## Development
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev    # http://localhost:3000
+npm test       # compatibility rule tests (Vitest)
+npm run lint
+npm run build
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Project layout
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- `src/data/parts.ts` — parts catalog
+- `src/lib/compatibility.ts` — compatibility rules, wattage, and totals
+- `src/lib/build-store.ts` — build state synced to the URL and local storage
+- `src/components/` — build list and part picker UI
